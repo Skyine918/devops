@@ -1,0 +1,12 @@
+#time-view {
+    width: 100vw;
+    height: 90vh;
+    position: relative;
+}
+#time {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
+}

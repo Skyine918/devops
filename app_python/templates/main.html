@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+
+
+    <div id="time-view">
+        <h2 id="time"></h2>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        async function main() {
+            let timer = document.getElementById("time");
+            let datetime = await get_time();
+            //timer.innerText = new Date(Date.now()).toTimeString();
+            timer.innerText = new Date(datetime).toLocaleString("en-US", {timeZone: 'Europe/Moscow'});
+        }
+        main()
+    </script>
+</body>
+</html>

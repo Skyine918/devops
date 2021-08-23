@@ -1,0 +1,9 @@
+.idea/
+__pycache__/
+*.sqlite3
+*.bat
+*.sh
+media/
+venv/
+/static/
+celerybeat-schedule
