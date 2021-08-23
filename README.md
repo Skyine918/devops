@@ -20,6 +20,14 @@
     <br/>
     All content below is just template to be filled later.
   </p>
+  
+  <h3 align="center">Docker</h3>
+  <ol>
+    <li>docker pull <a href="#about-the-project">skyline918/django-time-app</a></li>
+    <li>docker run -p 8000:8000 skyline918/django-time-app</li>
+    
+  </ol>
+  
 </p>
 <br /><br /><br />
 
