@@ -15,7 +15,7 @@
   <h3 align="center">Django Time application</h3>
 
   <p align="center">
-    Using axios, django, world time api. 
+    Using axios, django, world time api. Link to : <a href="https://github.com/Skyine918/devops">github repository</a>
     <br/>
     <br/>
     All content below is just template to be filled later.
@@ -23,13 +23,19 @@
   
   <h3 align="center">Docker</h3>
   <ol>
-    <li>docker pull <a href="#about-the-project">skyline918/django-time-app</a></li>
+    <li>Link to Docker Hub: <a href="https://hub.docker.com/repository/docker/skyline918/django-time-app">skyline918/django-time-app</a></li>
+    <li>docker pull <a href="">skyline918/django-time-app</a></li>
     <li>docker run -p 8000:8000 skyline918/django-time-app</li>
     
   </ol>
   
+  <h3 align="center">Linter</h3>
+  <ol>
+    <li>To run linter, use <i>pylint .\app_python</i></li>    
+  </ol>
 </p>
-<br /><br /><br />
+
+<br/><br/><br/>
 
 
 <!-- TABLE OF CONTENTS -->
@@ -175,23 +181,3 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 * [Sticky Kit](http://leafo.net/sticky-kit)
 * [JVectorMap](http://jvectormap.com)
 * [Font Awesome](https://fontawesome.com)
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
