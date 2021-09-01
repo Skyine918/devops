@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path
 
 from core.views import main_page
+from core.views import time
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page),
+    path('api/time/', time, name='time-api'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

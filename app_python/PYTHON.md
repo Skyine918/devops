@@ -11,3 +11,9 @@
     <li>Freeze requirements in <i>requirements.txt</i> file, to use it later in Docker/production server for example</li>
     <li>Add <i>.gitignore</i> file, add there .idea/, __pycache__/, .sqlite3, etc. To keep repository clean</li>
 </ul>
+<h4>Lab 3 (Tests)</h4>
+<ul>
+    <li>I have written django internal test framework unit tests, because I have django project.</li>
+    <li>I have written TestCase name, use-case, preconditions, steps to execute and expected results in python docstring</li>
+    <li>I have performed all statements coverage testing</li>
+</ul>
