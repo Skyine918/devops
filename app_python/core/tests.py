@@ -32,7 +32,7 @@ class TimeTestCase(APITestCase):
         self.assertEqual(response.data['timezone'], self.default_timezone, f"Default timezone is not {self.default_timezone}")
         moscow_time_from_api = datetime.fromisoformat(response.data['datetime'])
         moscow_time_from_test = datetime.now(pytz.timezone(self.default_timezone))
-        self.assertTrue((moscow_time_from_api - moscow_time_from_test).seconds < 10, f"Time difference is more than 10 seconds: {moscow_time_from_api} from api, {moscow_time_from_test} from test ")
+        self.assertTrue((moscow_time_from_api - moscow_time_from_test).seconds < 10, f"Time difference is more than 10 seconds: {moscow_time_from_api} from api, {moscow_time_from_test} from test. Difference: {(moscow_time_from_api - moscow_time_from_test).seconds}")
 
     def test_time_invalid_timezone(self):
         """
