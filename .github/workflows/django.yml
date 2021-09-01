@@ -61,6 +61,6 @@ jobs:
         context: .
         push: true
         builder: ${{ steps.buildx.outputs.name }}
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/django-time-app
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/django-time-app
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
