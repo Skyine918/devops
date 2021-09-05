@@ -6,3 +6,6 @@ __pycache__/
 media/
 venv/
 /static/
+.terraform/
+*.tfstate
+*.tfstate.backup
