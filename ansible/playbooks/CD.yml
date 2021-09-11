@@ -1,0 +1,5 @@
+- name: Install docker into my server
+  hosts: all
+
+  roles:
+    - role: '/home/skyline/ansible/devops/ansible/roles/docker_deploy_role'
