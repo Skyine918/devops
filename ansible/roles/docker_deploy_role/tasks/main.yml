@@ -12,6 +12,7 @@
 - name: Create and start services
   docker_compose:
     project_src: /root
+    pull: yes
   register: output
 
 - name: Run `docker-compose up` again
