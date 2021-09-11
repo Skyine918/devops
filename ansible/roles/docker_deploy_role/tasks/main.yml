@@ -2,7 +2,6 @@
   ansible.builtin.copy:
     src: /home/skyline/ansible/devops/docker-compose.yml
     dest: /root
-    group: foo
     mode: '0644'
 
 - name: Tear down existing services
