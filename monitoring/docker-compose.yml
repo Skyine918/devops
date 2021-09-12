@@ -1,0 +1,35 @@
+version: '3.7'
+
+networks:
+  loki:
+
+services:
+  django:
+    image: "skyline918/django-time-app"
+    ports:
+      - 8000:8000
+  loki:
+    image: grafana/loki:2.3.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  promtail:
+    image: grafana/promtail:2.3.0
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./config:/etc/promtail/config/
+    command: -config.file=/etc/promtail/config/docker-promtail.yml
+    ports:
+      - "9080:9080"
+    networks:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - loki
