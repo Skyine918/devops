@@ -33,3 +33,17 @@ services:
       - "3000:3000"
     networks:
       - loki
+
+  prometheus:
+    image: prom/prometheus:v2.7.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/app.cfg
+    networks:
+      - loki
+    command: >-
+      --config.file=/app.cfg/prometheus.yml
+      --storage.tsdb.path=/prometheus
+      --web.console.libraries=/usr/share/prometheus/console_libraries
+      --web.console.templates=/usr/share/prometheus/consoles
