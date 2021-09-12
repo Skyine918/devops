@@ -10,11 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from logging import LogRecord
 from pathlib import Path
+from pprint import pprint
+from socket import socket
+
+from django.http import HttpRequest
+from django.utils.log import DEFAULT_LOGGING
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from json_log_formatter import JSONFormatter
+from pythonjsonlogger.jsonlogger import JsonFormatter
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -26,7 +34,6 @@ SECRET_KEY = 'django-insecure-%z+vai-pd#j@n%m^8jz!wagwcm=*4r@g=v)@g=k3rglxa41l=e
 DEBUG = bool(os.environ.get('DEBUG', 'True'))
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,142.93.48.168').split(',')
-
 
 # Application definition
 
@@ -71,7 +78,57 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'devOpsCourse.wsgi.application'
+#
+# LOGGING_CONFIG = None
+# LOGLEVEL = os.getenv('DJ_LOGLEVEL', 'info').upper()
 
+class CustomJsonFormatter(JSONFormatter):
+
+    def json_record(self, message, extra: dict, record: LogRecord):
+        extra['level'] = record.levelname
+        if 'request' in extra and type(extra['request']) == socket:
+            sock: socket = extra['request']
+            extra['request'] = dict()
+            extra['request']['ip'] = sock.getpeername()[0]
+        return super(CustomJsonFormatter, self).json_record(message, extra, record)
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'},
+        'require_debug_true': {'()': 'django.utils.log.RequireDebugTrue'}
+    },
+    'formatters': {
+        'json.formatter': {
+            '()': 'app_python.devOpsCourse.settings.CustomJsonFormatter',
+        },
+        'django.server': {'()': 'django.utils.log.ServerFormatter', 'format': '[{server_time}] {message}', 'style': '{'}
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': ['require_debug_true'],
+            'formatter': 'json.formatter',
+            'level': 'INFO'
+        },
+        'django.server': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'json.formatter',
+            'level': 'INFO'
+        },
+        'mail_admins': {
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+            'level': 'ERROR'
+        }
+    },
+    'loggers': {
+        'django': {'handlers': ['console', 'mail_admins'], 'level': 'INFO'},
+        'django.server': {'handlers': ['django.server'], 'level': 'INFO', 'propagate': False}
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -82,7 +139,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -102,7 +158,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -115,7 +170,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -131,7 +185,6 @@ MEDIA_ROOT = os.environ.get("MEDIA_ROOT", os.path.join(PROJECT_ROOT, 'media'))
 MEDIA_URL = '/backend/media/'
 if DEBUG:
     MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
-
 
 STATIC_ROOT = os.environ.get("STATIC_ROOT", os.path.join(PROJECT_ROOT, 'static'))
 STATIC_URL = '/backend/static/'
