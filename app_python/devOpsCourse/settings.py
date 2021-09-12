@@ -102,7 +102,7 @@ LOGGING = {
     },
     'formatters': {
         'json.formatter': {
-            '()': 'app_python.devOpsCourse.settings.CustomJsonFormatter',
+            '()': 'devOpsCourse.settings.CustomJsonFormatter',
         },
         'django.server': {'()': 'django.utils.log.ServerFormatter', 'format': '[{server_time}] {message}', 'style': '{'}
     },
