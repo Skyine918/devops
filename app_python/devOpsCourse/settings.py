@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-%z+vai-pd#j@n%m^8jz!wagwcm=*4r@g=v)@g=k3rglxa41l=e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', 'True'))
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,142.93.48.168').split(',')
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -82,56 +82,6 @@ WSGI_APPLICATION = 'devOpsCourse.wsgi.application'
 # LOGGING_CONFIG = None
 # LOGLEVEL = os.getenv('DJ_LOGLEVEL', 'info').upper()
 
-class CustomJsonFormatter(JSONFormatter):
-
-    def json_record(self, message, extra: dict, record: LogRecord):
-        extra['level'] = record.levelname
-        if 'request' in extra and type(extra['request']) == socket:
-            sock: socket = extra['request']
-            extra['request'] = dict()
-            try:
-                extra['request']['ip'] = sock.getpeername()[0]
-            except Exception:
-                extra['request']['ip'] = "unknown"
-        return super(CustomJsonFormatter, self).json_record(message, extra, record)
-
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'},
-        'require_debug_true': {'()': 'django.utils.log.RequireDebugTrue'}
-    },
-    'formatters': {
-        'json.formatter': {
-            '()': 'devOpsCourse.settings.CustomJsonFormatter',
-        },
-        'django.server': {'()': 'django.utils.log.ServerFormatter', 'format': '[{server_time}] {message}', 'style': '{'}
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'filters': ['require_debug_true'],
-            'formatter': 'json.formatter',
-            'level': 'INFO'
-        },
-        'django.server': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'json.formatter',
-            'level': 'INFO'
-        },
-        'mail_admins': {
-            'class': 'django.utils.log.AdminEmailHandler',
-            'filters': ['require_debug_false'],
-            'level': 'ERROR'
-        }
-    },
-    'loggers': {
-        'django': {'handlers': ['console', 'mail_admins'], 'level': 'INFO'},
-        'django.server': {'handlers': ['django.server'], 'level': 'INFO', 'propagate': False}
-    },
-}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
