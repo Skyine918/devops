@@ -89,7 +89,10 @@ class CustomJsonFormatter(JSONFormatter):
         if 'request' in extra and type(extra['request']) == socket:
             sock: socket = extra['request']
             extra['request'] = dict()
-            extra['request']['ip'] = sock.getpeername()[0]
+            try:
+                extra['request']['ip'] = sock.getpeername()[0]
+            except Exception:
+                extra['request']['ip'] = "unknown"
         return super(CustomJsonFormatter, self).json_record(message, extra, record)
 
 
