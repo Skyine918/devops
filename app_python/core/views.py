@@ -9,7 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-from app_python.core.models import RequestLog
+from core.models import RequestLog
 
 
 def get_client_ip(request):
