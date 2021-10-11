@@ -31,7 +31,7 @@ def main_page(request: HttpRequest) -> HttpResponse:
 
 @api_view(['GET'])
 def visits(request: Request) -> Response:
-    logs = RequestLog.objects.all().order("-visits")[100]
+    logs = RequestLog.objects.all().order_by("-visits")[100]
     data = list(map(lambda l: {"ip": l.ip, "UserAgent": l.user_agent, "visits": l.visits}, logs))
     return Response(data=data)
 
