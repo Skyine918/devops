@@ -21,10 +21,12 @@ from django.urls import path
 from core.views import main_page
 from core.views import time
 
+from core.views import visits
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page),
     path('api/time/', time, name='time-api'),
-    path('visits/', time, name='visits-api'),
+    path('visits/', visits, name='visits-api'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
