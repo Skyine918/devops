@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 WORKDIR /usr/src/app/app_python
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python3 manage.py migrate; python3 manage.py runserver 0.0.0.0:8000"]

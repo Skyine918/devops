@@ -27,11 +27,21 @@ spec:
       serviceAccountName: {{ include "django-time-app.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      volumes:
+        - name: config-volume
+          configMap:
+            name: django-config
+
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config.json
+              subPath: config.json
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
