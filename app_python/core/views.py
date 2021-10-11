@@ -21,7 +21,6 @@ def get_client_ip(request):
     return ip
 
 
-@cache_page(200)
 def main_page(request: HttpRequest) -> HttpResponse:
     log, _ = RequestLog.objects.get_or_create(user_agent=request.META.get('HTTP_USER_AGENT', None), ip=get_client_ip(request))
     log.visits += 1
